@@ -10,9 +10,11 @@ export default function Community(props) {
                 <View style={styles.taskContainer}>
                         <Card style={styles.taskCard}>
                             <Text>{props.community.tasks[0].title}</Text>
+                            <View style={[styles.priority, checkStatus(props.community.tasks[0])]}></View>
                         </Card>
                         <Card style={styles.taskCard}>
                             <Text>{props.community.tasks[1].title}</Text>
+                            <View style={[styles.priority, checkStatus(props.community.tasks[1])]}></View>
                         </Card>
                     </View>
                 )
@@ -21,6 +23,7 @@ export default function Community(props) {
                 <View style={styles.taskContainer}>
                     <Card style={styles.taskCard}>
                         <Text>{props.community.tasks[0].title}</Text>
+                        <View style={[styles.priority, checkStatus(props.community.tasks[0])]}></View>
                     </Card>
                 </View>
             )
@@ -31,13 +34,13 @@ export default function Community(props) {
 
     const checkStatus = (task) => {
         if (task.priority === 'high'){
-            styles.highPriority
+            return styles.highPriority
         } else if (task.priority === 'medium'){
-            styles.mediumPriority
+            return styles.mediumPriority
         } else if (task.priority === 'low'){
-            styles.lowPriority
+            return styles.lowPriority
         } else {
-            styles.noPriority
+            return styles.noPriority
         }
     }
 
@@ -72,12 +75,23 @@ const styles = StyleSheet.create({
     },
 
     priority: {
-		position: "absolute",
-		height: "100%",
-		width: "4%",
-		left: 0,
-		top: 0,
-	},
+		// position: "absolute",
+		height: "10%",
+        width: "100%",
+    },
+    
+    highPriority:{
+        backgroundColor: '#F1B4B3'
+    },
+    mediumPriority:{
+        backgroundColor: '#F1DB94'
+    },
+    lowPriority:{
+        backgroundColor: '#91E0F1'
+    },
+    noPriority:{
+        backgroundColor: '#D8D8D8'
+    },
     
     titleRow: {
 		width: "100%",
@@ -103,6 +117,8 @@ const styles = StyleSheet.create({
     },
     
     taskCard: {
+        justifyContent: 'space-between',
+        alignItems: 'center',
         width: 160,
         height: 70,
     }
