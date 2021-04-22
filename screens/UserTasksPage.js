@@ -27,6 +27,7 @@ export default function Home(props) {
 				</Modal>
 				<AddNewButton showModal={showModal} />
 				<FlatList
+				showsVerticalScrollIndicator={false}
 					keyExtractor={(task, index) => task.id}
 					data={props.tasks}
 					renderItem={({ item }) => (

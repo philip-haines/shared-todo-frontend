@@ -1,8 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View } from "react-native";
-import Tasks from "../screens/UserTasksPage";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import Tasks from "../screens/UserTasksPage";
+import Communities from "../screens/UserCommunityPage"
 
 const Tab = createBottomTabNavigator();
 
@@ -20,13 +23,12 @@ export default function App(props) {
 };
 
 function CommunityScreen() {
-	return (
-		<View
-			style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-		>
-			<Text>Settings!</Text>
-		</View>
-	);
+	return <Communities 
+	communities={props.communities}
+	loading={props.loading}
+	updateTasks={props.updateTasks}
+	addTask={props.addTask}
+	/>;
 }
 	return (
 		<NavigationContainer>

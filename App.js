@@ -8,7 +8,6 @@ export default function App() {
 	const [communityState, setCommunityState] = useState([]);
 	const [userTasks, setUserTasks] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const [modalVisibility, setModalVisibility] = useState(false);
 
 	const userURL = "https://shared-todo-app.herokuapp.com/users/1";
 
@@ -43,7 +42,13 @@ export default function App() {
 	}, [userTasks]);
 
 	return (
-		<NavBar user={userState} tasks={userTasks} communities={communityState} loading={loading} updateTasks={updateTasks} addTask={addTask}/>
+		<NavBar 
+		user={userState} 
+		tasks={userTasks} 
+		communities={communityState} 
+		loading={loading} 
+		updateTasks={updateTasks} 
+		addTask={addTask}/>
 	);
 }
 
