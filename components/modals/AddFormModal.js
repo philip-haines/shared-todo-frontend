@@ -7,8 +7,8 @@ import {
 	Picker,
 	Button,
 } from "react-native";
-import Card from "./Card";
-import Input from "./Input";
+import Card from "../Card";
+import Input from "../Input";
 
 export default function AddFormModal(props) {
 	const [title, setTitle] = useState("");

@@ -1,33 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
-import Tasks from "./screens/UserTasksPage";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {StyleSheet} from 'react-native'
+import NavBar from './components/NavBar'
 
-const Tab = createBottomTabNavigator();
-
-const TaskScreen = () => {
-	return <Tasks />;
-};
-
-function SettingsScreen() {
-	return (
-		<View
-			style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-		>
-			<Text>Settings!</Text>
-		</View>
-	);
-}
 
 export default function App() {
+		const [userState, setUserState] = useState({});
+	const [communityState, setCommunityState] = useState([]);
+	const [userTasks, setUserTasks] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [modalVisibility, setModalVisibility] = useState(false);
+
+	const userURL = "https://shared-todo-app.herokuapp.com/users/1";
+
+	const getUsers = async () => {
+		try {
+			const response = await fetch(userURL);
+			const data = await response.json();
+
+			setUserState(data);
+			setCommunityState(data.communities);
+			setUserTasks(data.tasks);
+			setLoading(false);
+		} catch (error) {
+			throw error;
+		}
+	};
+
+	const updateTasks = (updatedTask) => {
+		const newTasks = userTasks.filter((task) => updatedTask.id !== task.id);
+		setUserTasks([...newTasks, updatedTask]);
+	};
+
+	const addTask = (newTask) => {
+		setUserTasks([...userTasks, newTask])
+	}
+
+	useEffect(() => {
+		let mounted = true;
+		if (mounted && !userTasks.length) {
+			getUsers();
+		}
+	}, [userTasks]);
+
 	return (
-		<NavigationContainer>
-			<Tab.Navigator initialRouteName="Tasks">
-				<Tab.Screen name="Tasks" component={TaskScreen} />
-				<Tab.Screen name="Details" component={SettingsScreen} />
-			</Tab.Navigator>
-		</NavigationContainer>
+		<NavBar user={userState} tasks={userTasks} communities={communityState} loading={loading} updateTasks={updateTasks} addTask={addTask}/>
 	);
 }
 

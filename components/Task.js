@@ -8,7 +8,7 @@ import {
 	Modal,
 } from "react-native";
 import Card from "./Card";
-import EditForm from "./EditFormModal";
+import EditForm from './modals/EditFormModal';
 
 export default function Task(props) {
 	const [modalVisibility, setModalVisibility] = useState(false);
