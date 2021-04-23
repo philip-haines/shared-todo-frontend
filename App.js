@@ -8,11 +8,9 @@ export default function App() {
 	const [communityState, setCommunityState] = useState([]);
 	const [userTasks, setUserTasks] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const [allTasks, setAllTasks] = useState(0)
-	console.log(allTasks)
 
 	const userURL = "https://shared-todo-app.herokuapp.com/users/1";
-	const taskURL = 'https://shared-todo-app.herokuapp.com/users/1'
+	const communityURL = 'https://shared-todo-app.herokuapp.com/communities/'
 
 	const getUsers = async () => {
 		try {
@@ -28,36 +26,43 @@ export default function App() {
 		}
 	};
 
+	const getCommunities = (newCommunity) => {
+		fetch(`${communityURL}${newCommunity.id}`)
+		.then (response => response.json())
+		.then (backEndCommunity => setCommunityState([...communityState, backEndCommunity]))
+	}
+
 
 	const updateTasks = (updatedTask) => {
-		const newTasks = userTasks.filter((task) => updatedTask.id !== task.id);
-		setUserTasks([...newTasks, updatedTask]);
+		setUserTasks([updatedTask, ...newTasks]);
 	};
 
 	const claimTask = (claimedTask) => {
-		console.log('Im being pinged')
 		const sameTask = userTasks.find(task => task.id === claimedTask.id)
 		if(!sameTask){
-			console.log('Im being pinged in your if statement')
 			setUserTasks([...userTasks, claimedTask])
 		}
 	}
 
-	const addTask = () => {
-		getUsers()
+	const addTask = (task, communityID) => {
+		copyOfCommunityState = [...communityState] 
+		const foundCommunity = copyOfCommunityState.find(stateCommunity => communityID === stateCommunity.id)
+		foundCommunity.tasks.push(task)
+
+		setCommunityState(copyOfCommunityState)
 	}
 
 	const addCommunity = (newCommunity) => {
-		setCommunityState([newCommunity, ...communityState])
+		getCommunities(newCommunity)
+		setCommunityState([...communityState, newCommunity])
 	}
 
 	useEffect(() => {
 		let mounted = true;
 		if (mounted && !userTasks.length) {
 			console.log('you hit me up top')
-			getUsers();
-		}
-	}, [userTasks]);
+			getUsers()};
+	}, []);
 
 	return (
 		<NavBar 

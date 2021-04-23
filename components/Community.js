@@ -8,7 +8,7 @@ export default function Community(props) {
     const [modalVisibility, setModalVisibility] = useState(false)
 
 
-    const renderCommunityTasks = () => {
+    const renderCommunityTaskPreview = () => {
 
         if(!props.community.tasks){
             return
@@ -72,7 +72,7 @@ export default function Community(props) {
                 </View>
                 <View>
                     <Text style={styles.subTitleText}>Recent Tasks</Text>
-                    {renderCommunityTasks()}
+                    {renderCommunityTaskPreview()}
                 </View>
             </Card>
         </TouchableOpacity>

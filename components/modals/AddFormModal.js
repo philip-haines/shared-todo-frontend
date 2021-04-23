@@ -40,10 +40,9 @@ export default function AddFormModal(props) {
 			}),
 		})
 			.then((response) => response.json())
-			.then((newTask) => {
-				console.log(props.addTask)
+			.then((newTask) => { 
 				props.closeModal();
-                props.addTask(newTask);
+                props.addTask(newTask, props.communityID);
 			})
 	};
 
