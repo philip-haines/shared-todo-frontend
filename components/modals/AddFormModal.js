@@ -19,7 +19,6 @@ export default function AddFormModal(props) {
 
 
 	const handleTitleChange = (enteredText) => {
-		console.log(props)
 		setTitle(enteredText);
 	};
 
@@ -34,7 +33,7 @@ export default function AddFormModal(props) {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				community_id: 1,
+				community_id: props.communityID,
 				title: title,
 				description: description,
 				priority: selectedValue,
@@ -42,26 +41,26 @@ export default function AddFormModal(props) {
 		})
 			.then((response) => response.json())
 			.then((newTask) => {
+				console.log(props.addTask)
 				props.closeModal();
-				newUseTask(newTask)
                 props.addTask(newTask);
 			})
 	};
 
-	const newUseTask = (newTask) => {
-		fetch(userTaskURL, {
-			method: 'POST',
-			headers: {
-				'content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				task_id: newTask.id,
-				user_id: props.userID
-			})
-		})
-		.then(response => response.json())
-		.then(data => console.log(data))
-	}
+		// const newUserTask = (newTask) => {
+	// 	fetch(userTaskURL, {
+	// 		method: 'POST',
+	// 		headers: {
+	// 			'content-Type': 'application/json'
+	// 		},
+	// 		body: JSON.stringify({
+	// 			task_id: newTask.id,
+	// 			user_id: props.userID
+	// 		})
+	// 	})
+	// 	.then(response => response.json())
+	// 	.then(data => console.log(data))
+	// }
 
 	
 	return (
@@ -92,7 +91,14 @@ export default function AddFormModal(props) {
 						<Picker.Item label="Medium" value="medium" />
 						<Picker.Item label="Low" value="low" />
 					</Picker>
-					<Button title="Submit" onPress={handleSubmit} />
+					<View style={styles.btnRow}>
+					<View style={styles.submitBtn}>
+						<Button title="Submit" onPress={handleSubmit} color="#fbfbfc"/>
+					</View>
+					<View style={styles.cancelBtn}>
+						<Button title="Cancel" onPress={() => props.closeModal()} color="#fbfbfc" />
+					</View>
+					</View>
 				</Card>
 			</View>
 		</TouchableWithoutFeedback>
@@ -130,5 +136,21 @@ const styles = StyleSheet.create({
 
 	picker: {
 		width: 200,
+	},
+
+	btnRow: {
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: "space-around"
+	},
+
+	submitBtn:{
+		width: '40%',
+		backgroundColor: '#a8dde0',
+		
+	},
+	cancelBtn:{
+		width: '40%',
+		backgroundColor: '#fabbb6',
 	},
 });

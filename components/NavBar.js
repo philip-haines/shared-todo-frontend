@@ -24,10 +24,13 @@ export default function App(props) {
 
 function CommunityScreen() {
 	return <Communities 
+	userID = {props.user.id}
 	communities={props.communities}
 	loading={props.loading}
 	updateTasks={props.updateTasks}
 	addTask={props.addTask}
+	addCommunity={props.addCommunity}
+	claimTask={props.claimTask}
 	/>;
 }
 	return (

@@ -1,11 +1,19 @@
-import React from 'react'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import React, {useState} from 'react'
+import { Text, View, StyleSheet, TouchableOpacity, Modal } from 'react-native'
 
 import Card from './Card'
+import CommunityShow from '../screens/CommunityShowPage'
 
 export default function Community(props) {
+    const [modalVisibility, setModalVisibility] = useState(false)
+
+
     const renderCommunityTasks = () => {
-        if (props.community.tasks[0] && props.community.tasks[1]){
+
+        if(!props.community.tasks){
+            return
+        } else {
+                if (props.community.tasks[0] && props.community.tasks[1]){
             return (
                 <View style={styles.taskContainer}>
                         <Card style={styles.taskCard}>
@@ -28,9 +36,10 @@ export default function Community(props) {
                 </View>
             )
         } else {
-            <Text>No Tasks Yet!</Text> 
+            return <Text>All Tasks Completed!</Text> 
         }
     }
+}
 
     const checkStatus = (task) => {
         if (task.priority === 'high'){
@@ -44,8 +53,19 @@ export default function Community(props) {
         }
     }
 
+    const showModal = () => {
+        setModalVisibility(true)
+    }
+
+    const closeModal = () => {
+        setModalVisibility(false)
+    }
+
     return (
-        <TouchableOpacity style={styles.screen}>
+        <TouchableOpacity style={styles.screen} onPress={showModal}>
+            <Modal visible={modalVisibility}>
+                <CommunityShow community={props.community} closeModal={closeModal} showModal={showModal} addTask={props.addTask} claimTask={props.claimTask}/>
+            </Modal>
             <Card style={styles.card}>
                 <View style={styles.titleRow}>
                 <Text style={styles.titleText}>{props.community.name}</Text>
@@ -74,8 +94,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
 
+    cardContainer: {
+		flexDirection: "row",
+		alignItems: "center",
+		height: "100%",
+	},
+
     priority: {
-		// position: "absolute",
 		height: "10%",
         width: "100%",
     },

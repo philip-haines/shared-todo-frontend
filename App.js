@@ -4,12 +4,15 @@ import NavBar from './components/NavBar'
 
 
 export default function App() {
-		const [userState, setUserState] = useState({});
+	const [userState, setUserState] = useState({});
 	const [communityState, setCommunityState] = useState([]);
 	const [userTasks, setUserTasks] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [allTasks, setAllTasks] = useState(0)
+	console.log(allTasks)
 
 	const userURL = "https://shared-todo-app.herokuapp.com/users/1";
+	const taskURL = 'https://shared-todo-app.herokuapp.com/users/1'
 
 	const getUsers = async () => {
 		try {
@@ -25,18 +28,33 @@ export default function App() {
 		}
 	};
 
+
 	const updateTasks = (updatedTask) => {
 		const newTasks = userTasks.filter((task) => updatedTask.id !== task.id);
 		setUserTasks([...newTasks, updatedTask]);
 	};
 
-	const addTask = (newTask) => {
-		setUserTasks([...userTasks, newTask])
+	const claimTask = (claimedTask) => {
+		console.log('Im being pinged')
+		const sameTask = userTasks.find(task => task.id === claimedTask.id)
+		if(!sameTask){
+			console.log('Im being pinged in your if statement')
+			setUserTasks([...userTasks, claimedTask])
+		}
+	}
+
+	const addTask = () => {
+		getUsers()
+	}
+
+	const addCommunity = (newCommunity) => {
+		setCommunityState([newCommunity, ...communityState])
 	}
 
 	useEffect(() => {
 		let mounted = true;
 		if (mounted && !userTasks.length) {
+			console.log('you hit me up top')
 			getUsers();
 		}
 	}, [userTasks]);
@@ -48,7 +66,9 @@ export default function App() {
 		communities={communityState} 
 		loading={loading} 
 		updateTasks={updateTasks} 
-		addTask={addTask}/>
+		addCommunity={addCommunity}
+		addTask={addTask}
+		claimTask={claimTask}/>
 	);
 }
 

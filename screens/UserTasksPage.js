@@ -21,11 +21,6 @@ export default function Home(props) {
 			<Loading />
 		) : (
 			<View style={styles.screen}>
-				<Modal visible={modalVisibility} animationType="fade"
-				transparent={true}>
-					<AddForm  showModal={showModal} closeModal={closeModal} addTask={props.addTask} userID={props.user.id}/>
-				</Modal>
-				<AddNewButton showModal={showModal} />
 				<FlatList
 				showsVerticalScrollIndicator={false}
 					keyExtractor={(task, index) => task.id}
@@ -41,7 +36,9 @@ export default function Home(props) {
 
 	return (
 		<View style={styles.screen}>
-			<View style={styles.topBar}></View>
+			<View style={styles.topBar}>
+				<Text style={styles.title}>Current Tasks</Text>
+			</View>
 			{renderComponent()}
 		</View>
 	);
@@ -55,10 +52,18 @@ const styles = StyleSheet.create({
 		paddingBottom: 20,
 	},
 
+	title: {
+		marginTop: 30,
+		fontSize: 24,
+	},
+
 	topBar: {
-		height: 70,
+		height: 130,
 		width: "100%",
+		justifyContent: 'flex-end',
+		alignItems: 'center',
 		backgroundColor: "#91AAF2",
+		paddingBottom: 10,
 	},
 
 	flatList: {
