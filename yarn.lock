@@ -5385,6 +5385,11 @@
   "resolved" "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz"
   "version" "1.3.1"
 
+"react-native-loading-gif@^1.1.3":
+  "integrity" "sha1-8cicjSotnKjgkVWW3lH4QY7Q+Y0="
+  "resolved" "https://registry.npmjs.org/react-native-loading-gif/-/react-native-loading-gif-1.1.3.tgz"
+  "version" "1.1.3"
+
 "react-native-reanimated@~2.1.0":
   "integrity" "sha512-tlPvvcdf+X7HGQ7g/7npBFhwMznfdk7MHUc9gUB/kp2abSscXNe/kOVKlrNEOO4DS11rNOXc+llFxVFMuNk0zA=="
   "resolved" "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-2.1.0.tgz"

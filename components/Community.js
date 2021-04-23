@@ -62,9 +62,9 @@ export default function Community(props) {
     }
 
     return (
-        <TouchableOpacity style={styles.screen} onPress={showModal}>
+        <TouchableOpacity activeOpacity={0.7} style={styles.screen} onPress={showModal}>
             <Modal visible={modalVisibility}>
-                <CommunityShow community={props.community} closeModal={closeModal} showModal={showModal} addTask={props.addTask} claimTask={props.claimTask}/>
+                <CommunityShow community={props.community} closeModal={closeModal} showModal={showModal} addTask={props.addTask} claimTask={props.claimTask} userID={props.userID}/>
             </Modal>
             <Card style={styles.card}>
                 <View style={styles.titleRow}>

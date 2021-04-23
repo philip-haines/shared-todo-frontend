@@ -34,7 +34,8 @@ export default function App() {
 
 
 	const updateTasks = (updatedTask) => {
-		setUserTasks([updatedTask, ...newTasks]);
+		filteredTasks = userTasks.filter(task => updatedTask.id !== task.id)
+		setUserTasks([updatedTask, ...filteredTasks]);
 	};
 
 	const claimTask = (claimedTask) => {

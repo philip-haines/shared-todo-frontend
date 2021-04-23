@@ -21,11 +21,23 @@ export default function Task(props) {
 		setModalVisibility(false);
 	};
 
+	   const checkStatus = (task) => {
+        if (task.priority === 'high'){
+            return styles.highPriority
+        } else if (task.priority === 'medium'){
+            return styles.mediumPriority
+        } else if (task.priority === 'low'){
+            return styles.lowPriority
+        } else {
+            return styles.noPriority
+        }
+    }
+
 	return (
-		<TouchableOpacity style={styles.screen}>
+		<View style={styles.screen}>
 			<Card style={styles.card}>
 				<View style={styles.cardContainer}>
-					<View style={styles.priority}></View>
+					<View style={[styles.priority, checkStatus(props.item)]}></View>
 					<View style={styles.cardContent}>
 						<View style={styles.textContainer}>
 							<View style={styles.titleRow}>
@@ -69,7 +81,7 @@ export default function Task(props) {
 					priorityLevel={props.item.priority}
 				/>
 			</Modal>
-		</TouchableOpacity>
+		</View>
 	);
 }
 
@@ -128,10 +140,22 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		height: "100%",
 		width: "4%",
-		backgroundColor: "#F2DB94",
 		left: 0,
 		top: 0,
 	},
+
+	highPriority:{
+        backgroundColor: '#F1B4B3'
+    },
+    mediumPriority:{
+        backgroundColor: '#F1DB94'
+    },
+    lowPriority:{
+        backgroundColor: '#91E0F1'
+    },
+    noPriority:{
+        backgroundColor: '#D8D8D8'
+    },
 
 	complete: {
 		backgroundColor: "#91E0F1",

@@ -46,21 +46,6 @@ export default function AddFormModal(props) {
 			})
 	};
 
-		// const newUserTask = (newTask) => {
-	// 	fetch(userTaskURL, {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'content-Type': 'application/json'
-	// 		},
-	// 		body: JSON.stringify({
-	// 			task_id: newTask.id,
-	// 			user_id: props.userID
-	// 		})
-	// 	})
-	// 	.then(response => response.json())
-	// 	.then(data => console.log(data))
-	// }
-
 	
 	return (
 		<TouchableWithoutFeedback>

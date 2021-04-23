@@ -6,12 +6,14 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Tasks from "../screens/UserTasksPage";
 import Communities from "../screens/UserCommunityPage"
+import Home from "../screens/HomeScreen"
 
 const Tab = createBottomTabNavigator();
 
 
 
 export default function App(props) {
+	
 	const TaskScreen = () => {
 	return <Tasks 
 	user={props.user} 
@@ -22,7 +24,13 @@ export default function App(props) {
 	/>;
 };
 
-function CommunityScreen() {
+	const HomeScreen = () => {
+	return <Home 
+	user={props.user}
+	loading={props.loading}/>;
+};
+
+const CommunityScreen = () => {
 	return <Communities 
 	userID = {props.user.id}
 	communities={props.communities}
@@ -35,9 +43,10 @@ function CommunityScreen() {
 }
 	return (
 		<NavigationContainer>
-			<Tab.Navigator initialRouteName="Tasks">
-				<Tab.Screen name="Tasks" component={TaskScreen} />
+			<Tab.Navigator initialRouteName="Home">
+				<Tab.Screen name="Home" component={HomeScreen} />
 				<Tab.Screen name="Communities" component={CommunityScreen} />
+				<Tab.Screen name="Tasks" component={TaskScreen} />
 			</Tab.Navigator>
 		</NavigationContainer>
 	);

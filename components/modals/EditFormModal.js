@@ -45,7 +45,6 @@ export default function EditFormModal(props) {
 	};
 
 	return (
-		<TouchableWithoutFeedback onPress={() => props.closeModal()}>
 			<View style={styles.screen}>
 				<Card style={styles.card}>
 					<Text style={styles.titleText}>Edit Your Task</Text>
@@ -72,10 +71,16 @@ export default function EditFormModal(props) {
 						<Picker.Item label="Medium" value="medium" />
 						<Picker.Item label="Low" value="low" />
 					</Picker>
-					<Button title="Submit" onPress={handleSubmit} />
+						<View style={styles.btnRow}>
+					<View style={styles.submitBtn}>
+						<Button title="Submit" onPress={handleSubmit} color="#fbfbfc"/>
+					</View>
+					<View style={styles.cancelBtn}>
+						<Button title="Cancel" onPress={() => props.closeModal()} color="#fbfbfc" />
+					</View>
+					</View>
 				</Card>
 			</View>
-		</TouchableWithoutFeedback>
 	);
 }
 
@@ -110,5 +115,21 @@ const styles = StyleSheet.create({
 
 	picker: {
 		width: 200,
+	},
+
+	btnRow: {
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: "space-around"
+	},
+
+	submitBtn:{
+		width: '40%',
+		backgroundColor: '#a8dde0',
+		
+	},
+	cancelBtn:{
+		width: '40%',
+		backgroundColor: '#fabbb6',
 	},
 });

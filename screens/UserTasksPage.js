@@ -2,19 +2,9 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, FlatList, Button, Modal } from "react-native";
 import Task from "../components/Task";
 import Loading from "../components/Loading";
-import AddForm from "../components/modals/AddFormModal"
-import AddNewButton from '../components/AddNewButton'
 
 export default function Home(props) {
-	const [modalVisibility, setModalVisibility] = useState(false);
 
-		const showModal = () => {
-		setModalVisibility(true);
-	};
-
-	const closeModal = () => {
-		setModalVisibility(false);
-	};
 
 	const renderComponent = () => {
 		return props.loading ? (
@@ -50,6 +40,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		marginBottom: 45,
 		paddingBottom: 20,
+		backgroundColor: '#d2dcfe'
 	},
 
 	title: {

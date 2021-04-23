@@ -4,7 +4,7 @@ import AddNewButton from '../components/AddNewButton'
 import AddFormModal from '../components/modals/AddFormModal'
 import CommunityTask from '../components/modals/CommunityTask'
 
-export default function CommunityShowPage({community, closeModal, addTask, claimTask}) {
+export default function CommunityShowPage({community, closeModal, addTask, claimTask, userID}) {
     const [communityTaskModalVisibility, setCommunityTaskModalVisibility] = useState(false)
 
     const showCommunityTaskModal = () => {
@@ -13,6 +13,11 @@ export default function CommunityShowPage({community, closeModal, addTask, claim
 
     const closeCommunityTaskModal = () => {
         setCommunityTaskModalVisibility(false)
+    }
+
+    const filterCommunityTasks = () => {
+        const unassignedTasks = community.tasks.filter(communityTask => communityTask.assigned !== true)
+        return unassignedTasks
     }
 
     return (
@@ -31,9 +36,9 @@ export default function CommunityShowPage({community, closeModal, addTask, claim
             <FlatList
             	showsVerticalScrollIndicator={false}
 					keyExtractor={(task, index) => task.id}
-					data={community.tasks}
+					data={filterCommunityTasks()}
 					renderItem={({ item }) => (
-						<CommunityTask task={item} claimTask={claimTask}/>
+						<CommunityTask task={item} claimTask={claimTask} userID={userID}/>
 					)}
 					style={styles.flatList}>
             </FlatList>
@@ -46,7 +51,7 @@ const styles = StyleSheet.create({
         height: '100%',
         width: '100%',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     topBar: {

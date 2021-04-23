@@ -4,6 +4,7 @@ import {View, Text, StyleSheet, FlatList, Modal} from 'react-native'
 import Community from '../components/Community'
 import AddNewButton from '../components/AddNewButton'
 import AddCommunityModal from '../components/modals/AddCommunityModal'
+import Loading from '../components/Loading'
 
 
 export default function UserCommunityPage(props) {
@@ -42,7 +43,7 @@ export default function UserCommunityPage(props) {
 					keyExtractor={(community, index) => community.id}
 					data={props.communities}
 					renderItem={({ item }) => (
-                        <Community community={item} addTask={props.addTask} claimTask={props.claimTask}/>
+                        <Community community={item} addTask={props.addTask} claimTask={props.claimTask} userID={props.userID}/>
 					)}
 				></FlatList>
 			</View>
@@ -62,7 +63,8 @@ const styles = StyleSheet.create({
         height: '100%',
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#d2dcfe'
     },
 
     topBar: {
